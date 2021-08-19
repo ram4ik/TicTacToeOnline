@@ -16,23 +16,30 @@ struct GameView: View {
     ]
     
     var body: some View {
-        VStack {
-            Text("Waiting for the player")
-            Button(action: {
-                
-            }, label: {
-                GameButton(title: "Quit", backgroundColor: Color(.systemRed))
-            })
-            Text("Loading view...")
-            Spacer()
-            
+        GeometryReader { geometry in
             VStack {
-                LazyVGrid(columns: columns, spacing: 5) {
-                    ForEach(0..<9) { i in
-                        ZStack {
-                            Circle()
-                                .foregroundColor(.blue)
-                                .frame(width: 100, height: 100, alignment: .center)
+                Text("Waiting for the player")
+                Button(action: {
+                    
+                }, label: {
+                    GameButton(title: "Quit", backgroundColor: Color(.systemRed))
+                })
+                Text("Loading view...")
+                Spacer()
+                
+                VStack {
+                    LazyVGrid(columns: columns, spacing: 5) {
+                        ForEach(0..<9) { i in
+                            ZStack {
+                                Circle()
+                                    .foregroundColor(.blue.opacity(0.7))
+                                    .frame(width: geometry.size.width / 3 - 15, height: geometry.size.width / 3 - 15)
+                                Image(systemName: "applelogo")
+                                    .resizable()
+                                    .frame(width: 40, height: 40, alignment: .center)
+                                    .foregroundColor(.white)
+                                    .opacity(0.8)
+                            }
                         }
                     }
                 }
